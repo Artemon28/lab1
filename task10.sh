@@ -1,7 +1,8 @@
 #!/bin/bash
 
 man bash |
-tr -s '[:space:]' '\n' |
-sort | uniq -c | sort -n -r|
-awk -F' ' '{if (length($2) >= 4) print $2}' |
+grep -o "[a-zA-Z]\{4,\}" |
+tr -t [:upper:] [:lower:] |
+sort | uniq -c | sort -r -n -k1 |
+awk '{print $1 " " $2}' |
 head -3
